@@ -32,10 +32,15 @@
   "homepage": "https://github.com/science-periodicals/jsonld-vis#readme",
   "devDependencies": {
     "esbuild": "^0.27.3",
-    "prettier": "^1.5.3"
+    "prettier": "^3.8.1"
   },
   "dependencies": {
     "d3": "^3.5.17",
     "d3-tip": "0.6.7"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "singleQuote": true,
+    "trailingComma": "none"
   }
 }
