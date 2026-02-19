@@ -1,6 +1,6 @@
 import d3Tip from 'd3-tip';
 
-export default function(d3) {
+export default function (d3) {
   // browserify
   if (!d3.tip) {
     require('d3-tip')(d3);
@@ -146,7 +146,10 @@ export default function(d3) {
           if (d.valueExtended) tip.show(d);
         })
         .on('mouseout', tip.hide);
-      let maxSpan = Math.max.apply(Math, nodes.map(d => d.y + maxLabelWidth));
+      let maxSpan = Math.max.apply(
+        Math,
+        nodes.map(d => d.y + maxLabelWidth)
+      );
       if (maxSpan + maxLabelWidth + 20 > w) {
         changeSVGWidth(maxSpan + maxLabelWidth);
         d3.select(selector).node().scrollLeft = source.y0;
@@ -179,10 +182,14 @@ export default function(d3) {
       nodeExit.select('text').style('fill-opacity', 0);
 
       let link = svg.selectAll('path.link').data(links, d => d.target.id);
-      link.enter().insert('path', 'g').attr('class', 'link').attr('d', () => {
-        let o = { x: source.x0, y: source.y0 };
-        return diagonal({ source: o, target: o });
-      });
+      link
+        .enter()
+        .insert('path', 'g')
+        .attr('class', 'link')
+        .attr('d', () => {
+          let o = { x: source.x0, y: source.y0 };
+          return diagonal({ source: o, target: o });
+        });
       link
         .transition()
         .duration(transitionDuration)
