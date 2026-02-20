@@ -35,8 +35,8 @@
     "prettier": "^3.8.1"
   },
   "dependencies": {
-    "d3": "^3.5.17",
-    "d3-tip": "0.6.7"
+    "d3": "^7.9.0",
+    "d3-tip": "0.9.1"
   },
   "prettier": {
     "arrowParens": "avoid",
