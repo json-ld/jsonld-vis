@@ -24,7 +24,15 @@
     "linked",
     "data"
   ],
-  "author": "Leon Chen",
+  "authors": [
+    "Leon Chen",
+    "Robin Berjon",
+    "Sebastien Ballesteros",
+    {
+      "name": "Benjamin Young",
+      "email": "byoung@digitalbazaar.com"
+    }
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/science-periodicals/jsonld-vis/issues"
