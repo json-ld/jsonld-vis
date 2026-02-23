@@ -32,7 +32,6 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
-dist/*.js
-dist/*.map
+dist/*
+example/dist/*
 
-example/bundle.js
