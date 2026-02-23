@@ -98,7 +98,8 @@ export default function (d3, jsonld, selector, config = {}) {
   }
 
   function update(source) {
-    tree(source);
+    // recompute the tree layout each time to account for node collapse/expand
+    tree(root);
     let nodes = root.descendants().reverse();
     let links = root.links();
     nodes.forEach(d => (d.y = d.depth * maxLabelWidth));
