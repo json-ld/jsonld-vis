@@ -144,7 +144,8 @@ export default function (d3, jsonld, selector, config = {}) {
     // initialize Tippy via delegation on the SVG root (fewer instances)
     delegate(svg.node(), {
       target: '[data-tippy-content]',
-      trigger: 'mouseenter'
+      trigger: 'mouseenter',
+      arrow: false
     });
 
     let nodeUpdate = nodeSel
