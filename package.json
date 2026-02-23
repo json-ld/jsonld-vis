@@ -11,6 +11,9 @@
     "build": "esbuild src/index.js src/index.css --bundle --format=esm --outdir=dist",
     "watch": "esbuild example/index.js example/index.css --bundle --format=esm--outdir=example/dist --watch"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/science-periodicals/jsonld-vis.git"
