@@ -22,15 +22,14 @@ To initialize, simply load data into the exported `jsonldVis` function:
 ```js
 import d3 from 'd3';
 import jsonldVis from 'jsonld-vis';
-jsonldVis(d3);
 
-d3.json('example.json', (err, data) => {
-  if (err) return console.warn(err);
-  d3.jsonldVis(data, '#graph', { w: 800, h: 600, maxLabelWidth: 250 });
-});
+jsonldVis(d3, data, '#graph');
+
+// OR override some layout options
+jsonldVis(d3, data, '#graph', { w: 900, h: 700, maxLabelWidth: 350 });
 ```
 
-#### `d3.jsonldVis(data, querySelector[, config])`
+#### `jsonldVis(d3, data, querySelector[, config])`
 
 Where the optional `config` variable is as follows:
 
@@ -40,7 +39,7 @@ Where the optional `config` variable is as follows:
   w: 800, // width
   maxLabelWidth: 250, // maximum label width
   transitionDuration: 750, // transition duration, in ms
-  transitionEase: 'cubic-in-out', // transition easing function
+  transitionEase: d3.easeCubicInOut, // transition easing function
   minRadius: 5 // minimum node radius
   scalingFactor: 2 // factor to scale node sizes
 }
@@ -52,7 +51,7 @@ must have horizontal scroll enabled:
 
 ```css
 query-selector {
-  overflow-x: autho;
+  overflow-x: auto;
 }
 ```
 
