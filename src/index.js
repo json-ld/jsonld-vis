@@ -1,4 +1,4 @@
-import d3Tip from 'd3-tip';
+import {delegate} from 'tippy.js';
 
 export default function (d3, jsonld, selector, config = {}) {
   if (!jsonld && !selector) return jsonldVis;
@@ -19,16 +19,7 @@ export default function (d3, jsonld, selector, config = {}) {
       .attr('width', w)
       .attr('height', h)
       .append('g')
-      .attr('transform', 'translate(' + maxLabelWidth + ',0)'),
-    tip = d3Tip()
-      .direction(d => (d.children || d._children ? 'w' : 'e'))
-      .offset(d => (d.children || d._children ? [0, -3] : [0, 3]))
-      .attr(
-        'class',
-        'd3-tip' + (config.tipClassName ? ` ${config.tipClassName}` : '')
-      )
-      .html(d => '<span>' + d.data.valueExtended + '</span>');
-  svg.call(tip);
+      .attr('transform', 'translate(' + maxLabelWidth + ',0)');
 
   let root = d3.hierarchy(jsonldTree(jsonld));
   root.x0 = h / 2;
@@ -118,11 +109,7 @@ export default function (d3, jsonld, selector, config = {}) {
           .style('fill', d => {
             if (d.data?.isIdNode) return d._children ? '#F5D76E' : 'white';
             return d._children ? '#86E2D5' : 'white';
-          })
-          .on('mouseover', (event, d) => {
-            if (d.data?.valueExtended) tip.show(event, d);
-          })
-          .on('mouseout', (event, d) => tip.hide(event, d));
+          });
         g.append('text')
           .attr('x', d => {
             let spacing = computeRadius(d) + 5;
@@ -131,11 +118,7 @@ export default function (d3, jsonld, selector, config = {}) {
           .attr('dy', '4')
           .attr('text-anchor', d => (d.children || d._children ? 'end' : 'start'))
           .text(d => d.data.name + (d.data.value ? ': ' + d.data.value : ''))
-          .style('fill-opacity', 0)
-          .on('mouseover', (event, d) => {
-            if (d.data?.valueExtended) tip.show(event, d);
-          })
-          .on('mouseout', (event, d) => tip.hide(event, d));
+          .style('fill-opacity', 0);
         return g;
       },
       update => update,
@@ -151,6 +134,18 @@ export default function (d3, jsonld, selector, config = {}) {
       changeSVGWidth(maxSpan + maxLabelWidth);
       d3.select(selector).node().scrollLeft = source.y0;
     }
+
+    // set tooltip attributes on merged selection so both new and updated nodes
+    // expose `data-tippy-content` and `data-tippy-placement` for tippy initialization
+    nodeSel
+      .attr('data-tippy-content', d => (d.data?.valueExtended ? d.data.valueExtended : null))
+      .attr('data-tippy-placement', d => (d.children || d._children ? 'left' : 'right'));
+
+    // initialize Tippy via delegation on the SVG root (fewer instances)
+    delegate(svg.node(), {
+      target: '[data-tippy-content]',
+      trigger: 'mouseenter'
+    });
 
     let nodeUpdate = nodeSel
       .transition()
