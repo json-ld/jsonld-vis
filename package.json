@@ -8,8 +8,8 @@
     "prepublish": "npm run build",
     "format": "prettier --single-quote --write \"{src,test}/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild src/index.js --bundle --outdir=dist",
-    "watch": "esbuild example/index.js --bundle --outfile=example/bundle.js --watch"
+    "build": "esbuild src/index.js src/index.css --bundle --outdir=dist",
+    "watch": "esbuild example/index.js example/index.css --bundle --outdir=example/dist --watch"
   },
   "repository": {
     "type": "git",
