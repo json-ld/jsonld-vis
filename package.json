@@ -9,6 +9,7 @@
     "format": "prettier --single-quote --write \"{src,test}/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "esbuild src/index.js src/index.css --bundle --format=esm --outdir=dist",
+    "build:example": "esbuild example/index.js example/index.css --bundle --format=esm --outdir=example/dist",
     "watch": "esbuild example/index.js example/index.css --bundle --format=esm--outdir=example/dist --watch"
   },
   "files": [
