@@ -1,6 +1,6 @@
 {
   "name": "jsonld-vis",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Turns JSON-LD into pretty graphs using d3.js",
   "type": "module",
   "browser": "dist/index.js",
